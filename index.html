@@ -1,509 +1,395 @@
 <!doctype html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>IG Compare — Followers vs Following (Comfort Dark)</title>
-
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <style>
-    /* --- Color palette (soft dark) --- */
-    :root{
-      --bg:#0b1220;
-      --card:#0f1724;
-      --row:#141b2a;
-      --row-alt:#111826;
-      --muted:#9fb1c7;
-      --text:#dfe9f5;
-      --accent:#2dd4bf; /* cyan toska */
-      --accent-2:#7ce7d1;
-      --soft-border: rgba(255,255,255,0.04);
-      --btn-bg: rgba(255,255,255,0.02);
-    }
-
-    body{ background: linear-gradient(180deg,var(--bg), #071021 120%); color:var(--text); font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; padding:14px; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
-    a{ color:var(--accent-2); text-decoration:none }
-    a:hover{ text-decoration:underline; color:var(--accent); }
-
-    .card{ background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid var(--soft-border); }
-    .muted{ color:var(--muted); font-size:0.95rem; }
-
-    /* Layout */
-    .topbar{ display:flex; gap:12px; align-items:center; margin-bottom:12px; }
-    .title h1{ margin:0; font-size:18px; }
-    .title .sub{ font-size:13px; color:var(--muted) }
-
-    /* Inputs */
-    textarea.form-control, input.form-control[type="file"] { background:transparent; border:1px solid rgba(255,255,255,0.04); color:var(--text); }
-    .btn-ghost{ background:transparent; border:1px solid rgba(255,255,255,0.04); color:var(--text); }
-    .btn-accent{ background: linear-gradient(90deg,var(--accent), var(--accent-2)); color:#042027; border:none; }
-
-    /* Table */
-    .table thead th{ background: rgba(255,255,255,0.02); color:var(--muted); border-bottom:1px solid rgba(255,255,255,0.03); }
-    .table tbody tr{ background: var(--row); border-bottom:1px solid rgba(255,255,255,0.02); }
-    .table tbody tr:nth-child(even){ background: var(--row-alt); }
-    .table td, .table th{ vertical-align:middle; color:var(--text) }
-
-    .table a { color: var(--accent-2); }
-    .table a:hover { color: var(--accent); }
-
-    /* Buttons small */
-    .btn-sm { font-size:0.82rem; padding: .25rem .5rem; }
-
-    /* Pagination */
-    .pagination .page-link{ background:transparent; color:var(--text); border:1px solid rgba(255,255,255,0.03); }
-    .pagination .page-item.active .page-link{ background:var(--accent); color:#032021; border:none; }
-
-    /* Responsive tweaks */
-    @media (max-width: 760px){
-      .topbar{ flex-direction:column; align-items:flex-start; gap:6px; }
-      .col-left, .col-right { width:100% }
-      textarea.form-control { min-height:120px; font-size:13px; }
-      .table-responsive { font-size:14px; }
-    }
-
-    /* horizontal scroll styling */
-    .table-responsive { overflow:auto; -webkit-overflow-scrolling:touch; border-radius:6px; border:1px solid rgba(255,255,255,0.02); padding:6px; background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent); }
-    .small-muted{ color:var(--muted); font-size:0.9rem; }
-
-    /* subtle hover row */
-    .table tbody tr:hover{ background: rgba(46, 57, 77, 0.5); transform: translateZ(0); }
-
-    /* minimal link button */
-    .btn-outline-light { border-color: rgba(255,255,255,0.04); color:var(--text); }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>IG Compare — Followers vs Following (Dark Mode)</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+:root{--bg:#0b1220;--card:#0f1724;--row:#141b2a;--row-alt:#111826;--muted:#9fb1c7;--text:#dfe9f5;--accent:#2dd4bf;--accent-2:#7ce7d1;--soft-border:rgba(255,255,255,0.04)}
+body{background:linear-gradient(180deg,var(--bg),#071021 120%);color:var(--text);font-family:Inter,system-ui,-apple-system,sans-serif;padding:14px}
+a{color:var(--accent-2);text-decoration:none}a:hover{text-decoration:underline;color:var(--accent)}
+.card{background:var(--card);border:1px solid var(--soft-border)}
+.topbar{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+.title h1{margin:0;font-size:18px}.title .sub{font-size:13px;color:var(--muted)}
+textarea.form-control,input.form-control[type="file"]{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--text)}
+textarea.form-control:focus,input.form-control:focus{background:rgba(255,255,255,0.02);color:var(--text)}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--text)}
+.btn-ghost:hover{background:rgba(255,255,255,0.05);color:#fff}
+.btn-accent{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#042027;border:none;font-weight:600}
+.table{--bs-table-bg:transparent;--bs-table-color:var(--text)}
+.table td,.table th{background-color:transparent!important;color:var(--text)!important;vertical-align:middle;border-color:rgba(255,255,255,0.02)!important}
+.table thead th{background-color:rgba(255,255,255,0.03)!important;color:var(--muted)!important}
+.table tbody tr{background-color:var(--row)!important}
+.table tbody tr:nth-child(even){background-color:var(--row-alt)!important}
+.table tbody tr:hover{background-color:rgba(46,57,77,0.4)!important}
+.pagination .page-link{background:var(--row);color:var(--text);border:1px solid rgba(255,255,255,0.03)}
+.pagination .page-item.active .page-link{background:var(--accent);color:#032021;border:none;font-weight:bold}
+@media(max-width:760px){.topbar{flex-direction:column;align-items:flex-start;gap:6px}.col-left,.col-right{width:100%}}
+.table-responsive{overflow:auto;border-radius:6px;border:1px solid rgba(255,255,255,0.02);padding:6px}
+.small-muted{color:var(--muted);font-size:.9rem}
+.btn-outline-light{border-color:rgba(255,255,255,0.04);color:var(--text)}
+.warn{color:#fbbf24}.note{color:#fbbf24;font-size:.8rem;margin-left:8px}
+</style>
 </head>
 <body>
+<div class="container-fluid">
+  <div class="topbar">
+    <div class="title">
+      <h1>IG Compare — Followers vs Following</h1>
+      <div class="sub">Validasi data • Multi-file • Tanpa library tambahan</div>
+    </div>
+    <div class="ms-auto d-flex gap-2 align-items-center">
+      <button id="resetStorage" class="btn btn-sm btn-outline-light">Reset saved checks</button>
+      <button id="loadExample" class="btn btn-sm btn-ghost">Load example</button>
+      <button id="clearInputs" class="btn btn-sm btn-ghost">Clear inputs</button>
+    </div>
+  </div>
 
-  <div class="container-fluid">
-    <div class="topbar">
-      <div class="title">
-        <h1>IG Compare — Followers vs Following</h1>
-        <div class="sub">Dark / comfortable • responsive • horizontal scroll on small screens</div>
+  <div class="row g-3">
+    <div class="col-lg-4 col-md-5 col-sm-12 col-left">
+      <div class="card p-3 mb-3">
+        <h5 class="mb-1">Upload ZIP export (disarankan)</h5>
+        <div class="small-muted mb-2">Pilih file ZIP dari Instagram (format <b>JSON</b>). Semua <code>followers_*.json</code> dan <code>following.json</code> dicari &amp; digabung otomatis, lalu langsung dibandingkan.</div>
+        <input id="zipFile" type="file" class="form-control form-control-sm mb-1" accept=".zip">
+        <div id="zipStatus" class="small-muted"></div>
       </div>
-
-      <div class="ms-auto d-flex gap-2 align-items-center">
-        <button id="resetStorage" class="btn btn-sm btn-outline-light">Reset saved checks</button>
-        <button id="loadExample" class="btn btn-sm btn-ghost">Load example</button>
-        <button id="clearInputs" class="btn btn-sm btn-ghost">Clear inputs</button>
+      <div class="card p-3 mb-3">
+        <h5 class="mb-1">Followers JSON</h5>
+        <div class="small-muted mb-2">Upload <b>semua</b> <code>followers_1.json, followers_2.json, …</code> sekaligus (pilih banyak file) atau paste teksnya.</div>
+        <input id="followersFile" type="file" multiple class="form-control form-control-sm mb-2" accept=".json">
+        <div id="followersFiles" class="small-muted mb-1"></div>
+        <div class="d-flex align-items-center gap-2 mb-2"><span class="small-muted">Jumlah followers di profil IG (untuk validasi):</span><input id="expectedFollowers" type="number" min="0" class="form-control form-control-sm" style="width:100px"></div>
+        <textarea id="followersText" class="form-control form-control-sm" placeholder="Paste followers.json di sini..." style="min-height:100px"></textarea>
+      </div>
+      <div class="card p-3 mb-3">
+        <h5 class="mb-1">Following JSON</h5>
+        <div class="small-muted mb-2">Upload <code>following.json</code> atau paste teksnya.</div>
+        <input id="followingFile" type="file" multiple class="form-control form-control-sm mb-2" accept=".json">
+        <div id="followingFiles" class="small-muted mb-1"></div>
+        <textarea id="followingText" class="form-control form-control-sm" placeholder="Paste following.json di sini..." style="min-height:100px"></textarea>
+        <div class="d-flex gap-2 mt-3">
+          <button id="compareBtn" class="btn btn-accent btn-sm px-3">Compare Data</button>
+          <button id="downloadCSV" class="btn btn-sm btn-outline-light">Download CSV</button>
+        </div>
       </div>
     </div>
 
-    <div class="row g-3">
-      <!-- LEFT: inputs -->
-      <div class="col-lg-4 col-md-5 col-sm-12 col-left">
-        <div class="card p-3 mb-3">
-          <h5 class="mb-1">Followers JSON</h5>
-          <div class="small-muted mb-2">Upload <code>followers.json</code> atau paste teksnya (ambil value).</div>
-          <input id="followersFile" type="file" class="form-control form-control-sm mb-2" accept=".json">
-          <textarea id="followersText" class="form-control form-control-sm" placeholder="Paste followers.json di sini..."></textarea>
+    <div class="col-lg-8 col-md-7 col-sm-12 col-right">
+      <div class="card p-3 mb-3">
+        <div id="report" class="mb-3"></div>
+        <div class="d-flex align-items-center mb-2 flex-wrap gap-2">
+          <select id="viewSelect" class="form-select form-select-sm" style="width:auto">
+            <option value="notFollowingBack" selected>Kamu follow → tidak follow balik</option>
+            <option value="mutual">Mutual (saling follow)</option>
+            <option value="followersOnly">Mereka follow kamu (kamu tidak follow)</option>
+            <option value="all">Semua (gabungan)</option>
+          </select>
+          <select id="pageSize" class="form-select form-select-sm" style="width:auto">
+            <option value="10" selected>10 / halaman</option>
+            <option value="25">25 / halaman</option>
+            <option value="50">50 / halaman</option>
+            <option value="100">100 / halaman</option>
+          </select>
+          <div class="ms-auto small-muted" id="summaryLine">Belum ada data</div>
         </div>
-
-        <div class="card p-3 mb-3">
-          <h5 class="mb-1">Following JSON</h5>
-          <div class="small-muted mb-2">Upload <code>following.json</code> atau paste teksnya (ambil title).</div>
-          <input id="followingFile" type="file" class="form-control form-control-sm mb-2" accept=".json">
-          <textarea id="followingText" class="form-control form-control-sm" placeholder="Paste following.json di sini..."></textarea>
-
-          <div class="d-flex gap-2 mt-3">
-            <button id="compareBtn" class="btn btn-accent btn-sm">Compare</button>
-            <button id="downloadCSV" class="btn btn-sm btn-outline-light">Download CSV</button>
-            <button id="exportChecked" class="btn btn-sm btn-outline-light">Export checked</button>
-          </div>
+        <div class="table-responsive">
+          <table class="table table-sm table-borderless mb-0">
+            <thead><tr>
+              <th style="width:40px"><input id="masterCheck" type="checkbox"></th>
+              <th style="width:60px">No</th><th>Username</th><th style="width:140px">Aksi</th>
+            </tr></thead>
+            <tbody id="resultBody"></tbody>
+          </table>
         </div>
-
-        <div class="card p-3 mb-3 small-muted">
-          <div><strong>Notes:</strong></div>
-          <ul style="margin:6px 0 0 18px">
-            <li>Data diproses lokal di browser — tidak dikirim ke server.</li>
-            <li>Checkbox tersimpan di <code>localStorage</code>.</li>
-            <li>Tabel dapat di-scroll secara horizontal pada layar kecil.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- RIGHT: results -->
-      <div class="col-lg-8 col-md-7 col-sm-12 col-right">
-        <div class="card p-3 mb-3">
-          <div class="d-flex align-items-center mb-2">
-            <div>
-              <select id="viewSelect" class="form-select form-select-sm">
-                <option value="notFollowingBack" selected>Kamu follow → tidak follow balik</option>
-                <option value="mutual">Mutual (saling follow)</option>
-                <option value="followersOnly">Mereka follow kamu (kamu tidak follow)</option>
-                <option value="all">Semua (gabungan)</option>
-              </select>
-            </div>
-
-            <div class="ms-2" style="min-width:130px">
-              <select id="pageSize" class="form-select form-select-sm">
-                <option value="5">5 / halaman</option>
-                <option value="10" selected>10 / halaman</option>
-                <option value="25">25 / halaman</option>
-                <option value="50">50 / halaman</option>
-              </select>
-            </div>
-
-            <div class="ms-auto d-flex gap-2 align-items-center">
-              <div class="small-muted" id="summaryLine">Belum ada data — upload & klik Compare</div>
-            </div>
-          </div>
-
-          <div class="table-responsive">
-            <table class="table table-sm table-borderless">
-              <thead>
-                <tr>
-                  <th style="width:44px"><input id="masterCheck" type="checkbox" title="Toggle semua di halaman"></th>
-                  <th style="width:64px">No</th>
-                  <th>Username</th>
-                  <th style="width:150px">Aksi</th>
-                </tr>
-              </thead>
-              <tbody id="resultBody">
-                <!-- rows rendered here -->
-              </tbody>
-            </table>
-          </div>
-
-          <div class="d-flex justify-content-between align-items-center mt-2">
-            <div class="small-muted" id="pageInfo">Showing 0 items</div>
-            <nav>
-              <ul class="pagination pagination-sm mb-0" id="pagination"></ul>
-            </nav>
-          </div>
-
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <div class="small-muted" id="pageInfo">Showing 0 items</div>
+          <nav><ul class="pagination pagination-sm mb-0" id="pagination"></ul></nav>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+const STORAGE_CHECKED='igcmp_checked_v4', STORAGE_LAST='igcmp_lastdata_v4';
+const USER_RE=/^[a-z0-9._]{1,30}$/;            // format username Instagram yang valid
+const ZW=/[\u200B-\u200D\u2060\uFEFF\u00A0]/g; // karakter tak terlihat
 
-  <script>
-  // ---- Keys and state ----
-  const STORAGE_CHECKED = 'igcmp_checked_v2';
-  const STORAGE_LAST = 'igcmp_lastdata_v2';
+let state={followersText:'',followingText:'',mutual:[],notFollowingBack:[],followersOnly:[],combined:[],report:null};
+let page=1,pageSize=10,currentView='notFollowingBack';
 
-  let state = {
-    followersText: '',
-    followingText: '',
-    followers: [],
-    following: [],
-    mutual: [],
-    notFollowingBack: [],
-    followersOnly: [],
-    combined: []
-  };
+const $=id=>document.getElementById(id);
+const followersText=$('followersText'),followingText=$('followingText'),resultBody=$('resultBody'),
+  summaryLine=$('summaryLine'),pageInfo=$('pageInfo'),pagination=$('pagination'),
+  pageSizeSel=$('pageSize'),viewSelect=$('viewSelect'),report=$('report');
 
-  let page = 1;
-  let pageSize = 10;
-  let currentView = 'notFollowingBack';
+// ---------- Input file (bisa banyak file, diurutkan natural: _1, _2, _10) ----------
+async function readFiles(inputEl,ta,lbl){
+  const fs=[...inputEl.files].sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true}));
+  if(!fs.length)return;
+  ta.value=(await Promise.all(fs.map(f=>f.text()))).join('\n');
+  lbl.textContent=fs.length+' file dimuat: '+fs.map(f=>f.name).join(', ');
+}
+$('followersFile').addEventListener('change',()=>readFiles($('followersFile'),followersText,$('followersFiles')));
+$('followingFile').addEventListener('change',()=>readFiles($('followingFile'),followingText,$('followingFiles')));
+$('clearInputs').addEventListener('click',()=>{
+  followersText.value='';followingText.value='';
+  $('followersFile').value='';$('followingFile').value='';
+  $('followersFiles').textContent='';$('followingFiles').textContent='';
+});
+$('loadExample').addEventListener('click',()=>{
+  const rec=u=>({title:u,string_list_data:[{href:'https://www.instagram.com/_u/'+u,timestamp:1}]});
+  followingText.value=JSON.stringify({relationships_following:['khalamite_gaming','jei1nn','qiww_xx','triyaap_'].map(rec)},null,1);
+  followersText.value=JSON.stringify(['jei1nn','triyaap_','karinakarin325'].map(u=>({title:'',string_list_data:[{href:'https://www.instagram.com/'+u,value:u,timestamp:1}]})),null,1);
+});
 
-  // DOM refs
-  const followersFile = document.getElementById('followersFile');
-  const followingFile = document.getElementById('followingFile');
-  const followersText = document.getElementById('followersText');
-  const followingText = document.getElementById('followingText');
-  const compareBtn = document.getElementById('compareBtn');
-  const resultBody = document.getElementById('resultBody');
-  const summaryLine = document.getElementById('summaryLine');
-  const pageInfo = document.getElementById('pageInfo');
-  const pagination = document.getElementById('pagination');
-  const pageSizeSel = document.getElementById('pageSize');
-  const viewSelect = document.getElementById('viewSelect');
-  const downloadCSV = document.getElementById('downloadCSV');
-  const exportChecked = document.getElementById('exportChecked');
-  const masterCheck = document.getElementById('masterCheck');
-  const resetStorage = document.getElementById('resetStorage');
-  const loadExample = document.getElementById('loadExample');
-  const clearInputs = document.getElementById('clearInputs');
-
-  // --- helpers: file to textarea ---
-  function readFileToTextarea(inputEl, textareaEl) {
-    const f = inputEl.files && inputEl.files[0];
-    if (!f) return;
-    const r = new FileReader();
-    r.onload = e => textareaEl.value = e.target.result;
-    r.readAsText(f);
-  }
-
-  followersFile.addEventListener('change', () => readFileToTextarea(followersFile, followersText));
-  followingFile.addEventListener('change', () => readFileToTextarea(followingFile, followingText));
-
-  loadExample.addEventListener('click', () => {
-    followersText.value = JSON.stringify([
-      {"title":"","media_list_data":[],"string_list_data":[{"href":"https://www.instagram.com/zr4aa_o","value":"zr4aa_o","timestamp":1761996198}]},
-      {"title":"","media_list_data":[],"string_list_data":[{"href":"https://www.instagram.com/niisaregitaaa","value":"niisaregitaaa","timestamp":1761927999}]},
-      {"title":"","media_list_data":[],"string_list_data":[{"href":"https://www.instagram.com/restyfatikaputrii","value":"restyfatikaputrii","timestamp":1761894121}]}
-    ], null, 2);
-
-    followingText.value = JSON.stringify({
-      "relationships_following":[
-        {"title":"zr4aa_o","string_list_data":[{"href":"https://www.instagram.com/_u/zr4aa_o","timestamp":1761990844}]},
-        {"title":"niisaregitaaa","string_list_data":[{"href":"https://www.instagram.com/_u/niisaregitaaa","timestamp":1761927943}]},
-        {"title":"restyfatikaputrii","string_list_data":[{"href":"https://www.instagram.com/_u/restyfatikaputrii","timestamp":1761893434}]},
-        {"title":"nuralres","string_list_data":[{"href":"https://www.instagram.com/_u/nuralres","timestamp":1761805777}]},
-        {"title":"blqissrn_","string_list_data":[{"href":"https://www.instagram.com/_u/blqissrn_","timestamp":1761740627}]}
-      ]
-    }, null, 2);
-  });
-
-  clearInputs.addEventListener('click', () => { followersText.value=''; followingText.value=''; });
-
-  // regex extract (value/title)
-  function extractByKey(text, key) {
-    const re = new RegExp('"' + key + '"\\s*:\\s*"([^"]+)"', 'g');
-    const out = [];
-    let m;
-    while ((m = re.exec(text)) !== null) out.push(m[1].trim());
-    // unique preserving first-case appearance
-    return Array.from(new Set(out));
-  }
-
-  function computeComparison() {
-    const followers = state.followers.map(s => s.trim()).filter(Boolean);
-    const following = state.following.map(s => s.trim()).filter(Boolean);
-    const fSet = new Set(followers.map(s => s.toLowerCase()));
-    const gSet = new Set(following.map(s => s.toLowerCase()));
-
-    const mutual = [], notFollowingBack = [], followersOnly = [];
-
-    following.forEach(u => {
-      if (fSet.has(u.toLowerCase())) mutual.push(u);
-      else notFollowingBack.push(u);
-    });
-    followers.forEach(u => {
-      if (!gSet.has(u.toLowerCase())) followersOnly.push(u);
-    });
-
-    state.mutual = mutual;
-    state.notFollowingBack = notFollowingBack;
-    state.followersOnly = followersOnly;
-    state.combined = Array.from(new Set([...mutual, ...notFollowingBack, ...followersOnly]));
-
-    saveLastData();
-  }
-
-  // localStorage: save last raw JSONs
-  function saveLastData() {
-    try {
-      localStorage.setItem(STORAGE_LAST, JSON.stringify({ followersText: followersText.value, followingText: followingText.value, t: Date.now() }));
-    } catch(e) { console.warn('saveLastData error', e); }
-  }
-  function loadLastData() {
-    try {
-      const raw = localStorage.getItem(STORAGE_LAST);
-      if (!raw) return false;
-      const obj = JSON.parse(raw);
-      if (obj.followersText) followersText.value = obj.followersText;
-      if (obj.followingText) followingText.value = obj.followingText;
-      return true;
-    } catch(e) { return false; }
-  }
-
-  // localStorage: checked map (key: lowercased username)
-  function loadCheckedMap(){ try { return JSON.parse(localStorage.getItem(STORAGE_CHECKED) || '{}'); } catch(e){ return {}; } }
-  function saveCheckedMap(m){ try { localStorage.setItem(STORAGE_CHECKED, JSON.stringify(m)); } catch(e){ console.warn(e); } }
-  function isChecked(u){ const m = loadCheckedMap(); return !!m[u.toLowerCase()]; }
-  function setChecked(u, val){ const m = loadCheckedMap(); if(val) m[u.toLowerCase()] = {u, t:Date.now()}; else delete m[u.toLowerCase()]; saveCheckedMap(m); updateCheckedCount(); }
-
-  function updateCheckedCount(){ const m = loadCheckedMap(); const el = document.querySelector('#pageInfo'); if(el) { const totalChecked = Object.keys(m).length; el.textContent = `Checked: ${totalChecked}`; } }
-
-  // render
-  function getCurrentList(){
-    if (currentView === 'mutual') return state.mutual;
-    if (currentView === 'notFollowingBack') return state.notFollowingBack;
-    if (currentView === 'followersOnly') return state.followersOnly;
-    return state.combined;
-  }
-
-  function renderTable(){
-    const list = getCurrentList();
-    const total = list.length;
-    pageSize = parseInt(pageSizeSel.value, 10) || 10;
-    const totalPages = Math.max(1, Math.ceil(total / pageSize));
-    if (page > totalPages) page = 1;
-    const start = (page - 1) * pageSize;
-    const pageData = list.slice(start, start + pageSize);
-
-    resultBody.innerHTML = '';
-    const checkedMap = loadCheckedMap();
-
-    pageData.forEach((username, idx) => {
-      const tr = document.createElement('tr');
-      const noTd = document.createElement('td');
-      noTd.style.width = '64px';
-      noTd.textContent = start + idx + 1;
-
-      // checkbox
-      const cbTd = document.createElement('td');
-      const cb = document.createElement('input');
-      cb.type = 'checkbox';
-      cb.className = 'form-check-input';
-      cb.style.margin = '0';
-      cb.dataset.username = username;
-      cb.checked = !!checkedMap[username.toLowerCase()];
-      cb.addEventListener('change', (e) => { setChecked(username, e.target.checked); toggleRowButtonLabel(e.target); });
-      cbTd.appendChild(cb);
-
-      // username
-      const userTd = document.createElement('td');
-      const a = document.createElement('a');
-      a.href = 'https://instagram.com/' + encodeURIComponent(username.replace(/^@/,'')); a.target = '_blank';
-      a.textContent = username;
-      userTd.appendChild(a);
-
-      // actions
-      const actTd = document.createElement('td');
-      const openBtn = document.createElement('a');
-      openBtn.className = 'btn btn-sm btn-outline-light me-2';
-      openBtn.href = a.href; openBtn.target = '_blank';
-      openBtn.textContent = 'Open';
-      const toggleBtn = document.createElement('button');
-      toggleBtn.className = 'btn btn-sm btn-ghost';
-      toggleBtn.textContent = cb.checked ? 'Uncheck' : 'Check';
-      toggleBtn.addEventListener('click', () => { cb.checked = !cb.checked; cb.dispatchEvent(new Event('change')); });
-
-      actTd.appendChild(openBtn); actTd.appendChild(toggleBtn);
-
-      // assemble: checkbox col first, then number, then username, then actions
-      tr.appendChild(cbTd);
-      tr.appendChild(noTd);
-      tr.appendChild(userTd);
-      tr.appendChild(actTd);
-      resultBody.appendChild(tr);
-    });
-
-    // update summary and pagination
-    renderPagination(totalPages);
-    const visibleFrom = total === 0 ? 0 : start + 1;
-    const visibleTo = start + pageData.length;
-    summaryLine.innerHTML = `<strong style="color:var(--accent-2)">${total}</strong> items • Showing <strong>${visibleFrom}</strong> - <strong>${visibleTo}</strong>`;
-    updateCheckedCount();
-
-    // master checkbox: checked if all visible checked
-    const visibleChecks = Array.from(document.querySelectorAll('input.form-check-input'));
-    if (visibleChecks.length === 0) { masterCheck.checked = false; masterCheck.indeterminate = false; }
-    else {
-      const all = visibleChecks.every(c => c.checked);
-      const some = visibleChecks.some(c => c.checked);
-      masterCheck.checked = all;
-      masterCheck.indeterminate = !all && some;
-    }
-
-    masterCheck.onchange = function(){
-      const vchecks = Array.from(document.querySelectorAll('input.form-check-input'));
-      vchecks.forEach(c => { c.checked = masterCheck.checked; setChecked(c.dataset.username, masterCheck.checked); toggleRowButtonLabel(c); });
-      updateCheckedCount();
-      // update action button labels
-      document.querySelectorAll('button.btn-ghost').forEach(b => {
-        const row = b.closest('tr'); if(!row) return;
-        const cb = row.querySelector('input.form-check-input');
-        b.textContent = cb && cb.checked ? 'Uncheck' : 'Check';
-      });
-    };
-  }
-
-  function toggleRowButtonLabel(cb){
-    const row = cb.closest('tr'); if(!row) return;
-    const btn = row.querySelector('button.btn-ghost');
-    if(btn) btn.textContent = cb.checked ? 'Uncheck' : 'Check';
-  }
-
-  function renderPagination(totalPages){
-    pagination.innerHTML = '';
-    const createItem = (label, p, disabled=false, active=false) => {
-      const li = document.createElement('li'); li.className = 'page-item' + (active ? ' active' : '') + (disabled ? ' disabled' : '');
-      const a = document.createElement('a'); a.className = 'page-link'; a.href = '#'; a.textContent = label;
-      a.addEventListener('click', (ev) => { ev.preventDefault(); if(!disabled){ page = p; renderTable(); }});
-      li.appendChild(a); return li;
-    };
-
-    pagination.appendChild(createItem('«', Math.max(1, page-1), page === 1));
-    // show up to 7 pages
-    const maxButtons = 7;
-    let start = Math.max(1, page - Math.floor(maxButtons/2));
-    let end = Math.min(totalPages, start + maxButtons - 1);
-    if (end - start < maxButtons - 1) start = Math.max(1, end - maxButtons + 1);
-    for (let i = start; i <= end; i++) pagination.appendChild(createItem(i, i, false, i === page));
-    pagination.appendChild(createItem('»', Math.min(totalPages, page+1), page === totalPages));
-    pageInfo.textContent = `Page ${page} / ${totalPages}`;
-  }
-
-  // Compare button action
-  compareBtn.addEventListener('click', () => {
-    if (!followersText.value.trim() || !followingText.value.trim()) {
-      alert('Harap isi atau upload kedua file JSON (followers & following).');
+// ---------- Upload ZIP export Instagram (JSZip via CDN) ----------
+$('zipFile').addEventListener('change',async()=>{
+  const f=$('zipFile').files[0],st=$('zipStatus');
+  if(!f)return;
+  if(typeof JSZip==='undefined'){st.textContent='JSZip gagal dimuat (cek koneksi/CDN).';return;}
+  try{
+    const zip=await JSZip.loadAsync(f);
+    const names=Object.keys(zip.files).filter(n=>!zip.files[n].dir);
+    const num=(a,b)=>a.localeCompare(b,undefined,{numeric:true});
+    const fers=names.filter(n=>/(^|\/)followers(_\d+)?\.json$/i.test(n)).sort(num);
+    const fing=names.filter(n=>/(^|\/)following\.json$/i.test(n)).sort(num);
+    if(!fers.length||!fing.length){
+      st.textContent='followers/following .json tidak ditemukan. Pastikan export Instagram dipilih dalam format JSON, bukan HTML.';
       return;
     }
-    state.followersText = followersText.value;
-    state.followingText = followingText.value;
-    state.followers = extractByKey(state.followersText, 'value');
-    state.following = extractByKey(state.followingText, 'title');
-    computeComparison();
-    currentView = viewSelect.value || 'notFollowingBack';
-    page = 1;
-    renderTable();
-  });
+    const read=ns=>Promise.all(ns.map(n=>zip.files[n].async('string'))).then(a=>a.join('\n'));
+    followersText.value=await read(fers);
+    followingText.value=await read(fing);
+    $('followersFiles').textContent=fers.length+' file dari ZIP: '+fers.map(n=>n.split('/').pop()).join(', ');
+    $('followingFiles').textContent=fing.length+' file dari ZIP: '+fing.map(n=>n.split('/').pop()).join(', ');
+    st.textContent=`Ditemukan ${fers.length} file followers & ${fing.length} file following.`;
+    runCompare();
+  }catch(e){st.textContent='ZIP tidak bisa diproses: '+e.message;}
+});
 
-  viewSelect.addEventListener('change', (e) => { currentView = e.target.value; page = 1; renderTable(); });
-  pageSizeSel.addEventListener('change', (e) => { pageSize = parseInt(e.target.value,10); page = 1; renderTable(); });
-
-  function extractByKey(text, key) {
-    const re = new RegExp('"' + key + '"\\s*:\\s*"([^"]+)"', 'g');
-    const out = []; let m;
-    while ((m = re.exec(text)) !== null) out.push(m[1].trim());
-    return Array.from(new Set(out));
+// ---------- Parser: terima 1 JSON atau beberapa JSON yang ditempel berurutan ----------
+function parseJsonDocs(text){
+  text=text.trim();if(!text)return[];
+  try{return[JSON.parse(text)];}catch(e){}
+  const docs=[];let depth=0,start=-1,inStr=false,esc=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(inStr){if(esc)esc=false;else if(c==='\\')esc=true;else if(c==='"')inStr=false;continue;}
+    if(c==='"')inStr=true;
+    else if(c==='{'||c==='['){if(depth++===0)start=i;}
+    else if(c==='}'||c===']'){if(--depth===0&&start>=0){docs.push(JSON.parse(text.slice(start,i+1)));start=-1;}}
   }
+  if(!docs.length||depth!==0)throw new Error('JSON tidak valid');
+  return docs;
+}
 
-  // CSV downloads
-  function downloadArrayAsCSV(arr, filename){
-    const rows = [['username','profile_url']];
-    arr.forEach(u => rows.push([u, 'https://instagram.com/' + u.replace(/^@/,'')]));
-    const csv = rows.map(r => r.map(c => '"' + String(c).replace(/"/g,'""') + '"').join(',')).join('\\n');
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-  }
+function userFromHref(h){
+  try{
+    const u=new URL(h);
+    if(!/(^|\.)instagram\.com$/i.test(u.hostname))return'';
+    const p=u.pathname.split('/').filter(Boolean);
+    if(p[0]==='_u')p.shift();
+    return p[0]?decodeURIComponent(p[0]):'';
+  }catch(e){return'';}
+}
 
-  downloadCSV.addEventListener('click', () => {
-    const list = getCurrentList();
-    if (!list.length) return alert('Tidak ada data untuk di-download.');
-    downloadArrayAsCSV(list, 'ig_compare_' + currentView + '.csv');
-  });
+// ---------- Ekstraksi: 1 record = 1 akun, dengan semua identitasnya (value/href/title) ----------
+function extract(text,label,expectKey){
+  const rep={rec:0,dup:0,bad:[],warn:[],min:Infinity,max:0},list=[],idx=new Map();
+  let docs;
+  try{docs=parseJsonDocs(text);}catch(e){throw new Error('JSON '+label+' tidak valid. Pastikan file yang diupload benar.');}
 
-  exportChecked.addEventListener('click', () => {
-    const checked = Object.values(loadCheckedMap()||{}).map(o => o.u);
-    if (!checked.length) return alert('Belum ada yang dicentang.');
-    downloadArrayAsCSV(checked, 'ig_checked_export.csv');
-  });
-
-  // reset storage
-  resetStorage.addEventListener('click', () => {
-    if (!confirm('Reset semua saved checklists dan last data?')) return;
-    localStorage.removeItem(STORAGE_CHECKED);
-    localStorage.removeItem(STORAGE_LAST);
-    alert('Storage di-reset. Halaman akan reload.');
-    location.reload();
-  });
-
-  // load last saved JSON (if any) and auto-compare
-  (function init(){
-    const had = loadLastData();
-    updateCheckedCount();
-    if (had) {
-      setTimeout(() => {
-        state.followers = extractByKey(followersText.value, 'value');
-        state.following = extractByKey(followingText.value, 'title');
-        computeComparison();
-        renderTable();
-      }, 250);
+  const walk=n=>{
+    if(Array.isArray(n))return n.forEach(walk);
+    if(!n||typeof n!=='object')return;
+    if(Array.isArray(n.string_list_data)){
+      const title=typeof n.title==='string'?n.title:'';
+      n.string_list_data.forEach(it=>{
+        if(!it||typeof it!=='object')return;
+        rep.rec++;
+        if(Number.isFinite(it.timestamp)){rep.min=Math.min(rep.min,it.timestamp);rep.max=Math.max(rep.max,it.timestamp);}
+        const raw=[it.value,userFromHref(it.href||''),title]
+          .map(x=>typeof x==='string'?x.normalize('NFKC').replace(ZW,'').trim().replace(/^@/,''):'')
+          .filter(Boolean);
+        const valid=raw.filter(x=>USER_RE.test(x.toLowerCase()));
+        if(!valid.length){rep.bad.push(raw[0]||'(kosong)');return;}
+        const ids=[...new Set(valid.map(x=>x.toLowerCase()))];
+        const hit=ids.map(i=>idx.get(i)).find(Boolean);
+        if(hit){rep.dup++;ids.forEach(i=>{hit.ids.add(i);idx.set(i,hit);});return;}
+        const e={name:valid[0],ids:new Set(ids)};
+        list.push(e);ids.forEach(i=>idx.set(i,e));
+      });
     }
-  })();
+    for(const k in n)if(k!=='string_list_data')walk(n[k]);
+  };
 
-  </script>
+  docs.forEach(d=>{
+    if(d&&typeof d==='object'&&!Array.isArray(d)&&!(expectKey in d))
+      rep.warn.push(`File ${label}: key "${expectKey}" tidak ditemukan (ada: ${Object.keys(d).join(', ')||'kosong'}). Cek apakah file-nya benar.`);
+    walk(d);
+  });
+  if(!rep.rec)rep.warn.push(`File ${label}: tidak ada data username yang dikenali.`);
+  if(rep.bad.length)rep.warn.push(`${rep.bad.length} entri ${label} dilewati karena username tidak valid: ${rep.bad.slice(0,5).join(', ')}${rep.bad.length>5?' …':''}`);
+  return{list,idx,rep};
+}
+
+// ---------- Jarak edit (deteksi username mirip / kemungkinan ganti username) ----------
+function lev(a,b){
+  if(Math.abs(a.length-b.length)>2)return 3;
+  const d=Array.from({length:a.length+1},(_,i)=>[i]);
+  for(let j=1;j<=b.length;j++)d[0][j]=j;
+  for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)
+    d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
+  return d[a.length][b.length];
+}
+function markSimilar(xs,ys){
+  let n=0;
+  xs.forEach(x=>{
+    const a=x.name.toLowerCase();if(a.length<5)return;
+    const m=ys.find(y=>{const b=y.name.toLowerCase();return b.length>=5&&lev(a,b)<=2;});
+    if(m){x.note='mirip: '+m.name;n++;}
+  });
+  return n;
+}
+
+function computeComparison(){
+  const A=extract(state.followersText,'followers','relationships_followers');
+  const B=extract(state.followingText,'following','relationships_following');
+  const has=(e,idx)=>[...e.ids].some(i=>idx.has(i));
+  const mutual=[],nfb=[],fo=[];
+  B.list.forEach(e=>(has(e,A.idx)?mutual:nfb).push(e));
+  A.list.forEach(e=>{if(!has(e,B.idx))fo.push(e);});
+
+  const sim=markSimilar(nfb,fo);markSimilar(fo,nfb);
+  const warnings=[...A.rep.warn,...B.rep.warn];
+  const dt=t=>new Date(t*1000).toLocaleDateString('id-ID');
+  if(isFinite(A.rep.min)&&isFinite(B.rep.min)&&A.rep.min-B.rep.min>30*86400)
+    warnings.unshift(`Followers di file hanya tercatat mulai ${dt(A.rep.min)}, padahal following sudah ada sejak ${dt(B.rep.min)}. Kemungkinan export dibatasi Date range, sehingga followers lama tidak ikut.`);
+  const exp=parseInt($('expectedFollowers').value,10);
+  if(exp>0&&A.list.length<exp*0.97)
+    warnings.unshift(`!Followers di file ${A.list.length}, di profil ${exp}. Data followers TIDAK LENGKAP, hasil "tidak follow balik" tidak akurat. Export ulang dengan Date range "All time" dan format JSON.`);
+  if(sim)warnings.push(`${sim} akun di "tidak follow balik" punya username mirip dengan akun di "followers saja" (bisa jadi ganti username). Cek manual, ditandai ⚠.`);
+
+  state.mutual=mutual;state.notFollowingBack=nfb;state.followersOnly=fo;
+  state.combined=[...mutual,...nfb,...fo];
+  state.report={fers:A.list.length,fRec:A.rep.rec,fDup:A.rep.dup,fing:B.list.length,gRec:B.rep.rec,gDup:B.rep.dup,
+    mutual:mutual.length,nfb:nfb.length,fo:fo.length,warnings};
+  saveLastData();
+}
+
+function renderReport(){
+  const r=state.report;
+  if(!r){report.innerHTML='';return;}
+  const ok=r.mutual+r.nfb===r.fing&&r.mutual+r.fo===r.fers;
+  report.innerHTML=`<div class="small-muted">Followers: <b>${r.fers}</b> unik (${r.fRec} record, ${r.fDup} duplikat) • Following: <b>${r.fing}</b> unik (${r.gRec} record, ${r.gDup} duplikat) • Mutual <b>${r.mutual}</b> • Tidak follow balik <b>${r.nfb}</b> • Followers saja <b>${r.fo}</b> • Cek konsistensi: <b style="color:${ok?'var(--accent)':'#f87171'}">${ok?'✓ OK':'✗ Tidak cocok'}</b></div>`;
+  r.warnings.forEach(w=>{const d=document.createElement('div');const bad=w[0]==='!';d.className='small-muted warn';if(bad){d.style.cssText='color:#f87171;font-weight:600';w=w.slice(1);}d.textContent=(bad?'⛔ ':'⚠ ')+w;report.appendChild(d);});
+}
+
+// ---------- Storage ----------
+function saveLastData(){try{localStorage.setItem(STORAGE_LAST,JSON.stringify({followersText:followersText.value,followingText:followingText.value}));}catch(e){}}
+function loadLastData(){
+  try{
+    const raw=localStorage.getItem(STORAGE_LAST);if(!raw)return false;
+    const o=JSON.parse(raw);
+    if(o.followersText)followersText.value=o.followersText;
+    if(o.followingText)followingText.value=o.followingText;
+    return !!(o.followersText&&o.followingText);
+  }catch(e){return false;}
+}
+function loadCheckedMap(){try{return JSON.parse(localStorage.getItem(STORAGE_CHECKED)||'{}');}catch(e){return{};}}
+function saveCheckedMap(m){try{localStorage.setItem(STORAGE_CHECKED,JSON.stringify(m));}catch(e){}}
+function setChecked(u,val){const m=loadCheckedMap();if(val)m[u.toLowerCase()]={u,t:Date.now()};else delete m[u.toLowerCase()];saveCheckedMap(m);}
+
+// ---------- Render ----------
+function currentList(){
+  return currentView==='mutual'?state.mutual:currentView==='notFollowingBack'?state.notFollowingBack:currentView==='followersOnly'?state.followersOnly:state.combined;
+}
+function renderTable(){
+  const list=currentList(),total=list.length;
+  pageSize=parseInt(pageSizeSel.value,10)||10;
+  const totalPages=Math.max(1,Math.ceil(total/pageSize));
+  if(page>totalPages)page=1;
+  const start=(page-1)*pageSize;
+  resultBody.innerHTML='';
+  const checkedMap=loadCheckedMap();
+
+  list.slice(start,start+pageSize).forEach((item,idx)=>{
+    const username=item.name,tr=document.createElement('tr');
+    const cbTd=document.createElement('td'),cb=document.createElement('input');
+    cb.type='checkbox';cb.className='form-check-input';cb.dataset.username=username;
+    cb.checked=!!checkedMap[username.toLowerCase()];
+    cb.onchange=e=>setChecked(username,e.target.checked);
+    cbTd.appendChild(cb);
+
+    const noTd=document.createElement('td');noTd.textContent=start+idx+1;
+
+    const url='https://instagram.com/'+encodeURIComponent(username);
+    const userTd=document.createElement('td'),a=document.createElement('a');
+    a.href=url;a.target='_blank';a.rel='noopener';a.textContent=username;userTd.appendChild(a);
+    if(item.note){const s=document.createElement('span');s.className='note';s.textContent='⚠ '+item.note;userTd.appendChild(s);}
+
+    const actTd=document.createElement('td'),btn=document.createElement('a');
+    btn.className='btn btn-sm btn-outline-light';btn.href=url;btn.target='_blank';btn.rel='noopener';btn.textContent='Open IG';
+    actTd.appendChild(btn);
+
+    tr.append(cbTd,noTd,userTd,actTd);resultBody.appendChild(tr);
+  });
+
+  renderPagination(totalPages);
+  summaryLine.innerHTML=`<strong style="color:var(--accent)">${total}</strong> items found`;
+  const master=$('masterCheck'),checks=[...resultBody.querySelectorAll('.form-check-input')];
+  master.checked=checks.length>0&&checks.every(c=>c.checked);
+  master.onchange=()=>checks.forEach(c=>{c.checked=master.checked;setChecked(c.dataset.username,master.checked);});
+}
+function renderPagination(totalPages){
+  pagination.innerHTML='';
+  const add=(lbl,p,act,dis)=>{
+    const li=document.createElement('li');li.className=`page-item ${act?'active':''} ${dis?'disabled':''}`;
+    const a=document.createElement('a');a.className='page-link';a.href='#';a.textContent=lbl;
+    a.onclick=e=>{e.preventDefault();if(!dis){page=p;renderTable();}};
+    li.appendChild(a);pagination.appendChild(li);
+  };
+  add('«',page-1,false,page===1);
+  let s=Math.max(1,page-2),e=Math.min(totalPages,s+4);
+  if(e-s<4)s=Math.max(1,e-4);
+  for(let i=s;i<=e;i++)add(i,i,i===page,false);
+  add('»',page+1,false,page===totalPages);
+  pageInfo.textContent=`Page ${page} of ${totalPages}`;
+}
+
+function runCompare(){
+  state.followersText=followersText.value;state.followingText=followingText.value;
+  computeComparison();page=1;renderReport();renderTable();
+}
+
+$('compareBtn').addEventListener('click',()=>{
+  if(!followersText.value.trim()||!followingText.value.trim())return alert('Isi kedua kolom JSON dulu!');
+  try{runCompare();}catch(e){alert(e.message);}
+});
+viewSelect.addEventListener('change',e=>{currentView=e.target.value;page=1;renderTable();});
+pageSizeSel.addEventListener('change',()=>{page=1;renderTable();});
+
+$('downloadCSV').addEventListener('click',()=>{
+  const list=currentList();
+  if(!list.length)return alert('Data kosong.');
+  const q=s=>'"'+String(s).replace(/"/g,'""')+'"';
+  const csv='username,url,catatan\n'+list.map(u=>[q(u.name),q('https://instagram.com/'+encodeURIComponent(u.name)),q(u.note||'')].join(',')).join('\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download=`ig_compare_${currentView}.csv`;a.click();
+});
+
+$('resetStorage').addEventListener('click',()=>{
+  if(confirm('Reset semua?')){try{localStorage.clear();}catch(e){}location.reload();}
+});
+
+(function init(){
+  if(loadLastData())setTimeout(()=>{try{runCompare();}catch(e){}},100);
+})();
+</script>
 </body>
 </html>
